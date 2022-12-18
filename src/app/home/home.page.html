@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> My Profile </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+  <!-- <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header> -->
+
+  <div id="container">
+    <div class="preview">
+      <ion-avatar (click)="changeImage()">
+        <img *ngIf="profile?.imageUrl; else placheolder_avatar;" [src]="profile.imageUrl" />
+        <ng-template #placheolder_avatar>
+          <div class="fallback">
+            <p>Select avatar</p>
+          </div>
+        </ng-template>
+      </ion-avatar>
+    </div>
+
+
+    <ion-item *ngFor="let contact of contacts | async">
+      <ion-thumbnail slot="start" (click)="goToContactDetail(contact)">
+        <img [src]="contact?.imageUrl" />
+      </ion-thumbnail>
+      <ion-label (click)="goToContactDetail(contact)">{{contact?.email}}</ion-label>
+      <ion-button color="primary" float="end" shape="round" (click)="notify(contact)">notify</ion-button>
+
+    </ion-item>
+  
+  </div>
+</ion-content>
